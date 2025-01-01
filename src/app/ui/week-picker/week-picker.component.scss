@@ -1,0 +1,86 @@
+$cell-border-color: #393f42;
+
+.piker-container{
+  position: relative;
+  min-width: 268px;
+  width: 100%;
+}
+
+.picker-dropdown{
+  position: absolute;
+  width: 100%;
+  //right: 0;
+  padding-left: inherit;
+  padding-right: inherit;
+  margin-left: inherit;
+  margin-right: inherit;
+  z-index: 1000;
+}
+.week-row{
+  //margin: 3px;
+}
+.week-day-cell{
+  padding: 3px 6px;
+  //margin: 0 1px;
+  //background-color: #292a2a;
+  border-top: 1px solid $cell-border-color;
+  border-left: 1px solid $cell-border-color;
+  cursor: pointer;
+  user-select: none;
+  width: 33px;
+  overflow: hidden;
+
+  &:hover{
+    background-color: #32333a;
+  }
+}
+.week-label{
+  padding: 3px 5px;
+  width: 36px;
+  //background-color: #292a2a;
+  text-align: center;
+  border-bottom: 1px solid $cell-border-color;
+
+  &:hover{
+    background-color: #32333a;
+  }
+
+  &:hover ~ .week-day-cell{
+    background-color: #32333a;
+  }
+}
+
+.picker-dropdown .week-row:nth-child(n-1) .week-label{
+  border-bottom: none;
+}
+
+.disabled-day{
+  color: dimgray;
+  cursor: default;
+
+  &:hover{
+    background-color: transparent;
+  }
+}
+
+.week-day-header{
+  @extend .week-day-cell;
+  cursor: default;
+  background-color: #2e2e2e;
+
+  font-size: 11px;
+  &:hover{
+    background-color: #2e2e2e;
+  }
+}
+.today-btn{
+  cursor: pointer;
+  color: #d6d6d8;
+  &:hover{
+    color: #70a3c8;
+  }
+}
+
+.active{
+  background-color: #3f4e5e;
+}

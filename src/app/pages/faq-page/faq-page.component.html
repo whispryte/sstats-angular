@@ -1,0 +1,148 @@
+<!-- Page header -->
+<div class="page-header page-header-light shadow">
+  <div class="page-header-content d-lg-flex">
+    <div class="d-flex">
+      <h4 class="page-title mb-0">
+        FAQ
+      </h4>
+
+      <a href="#page_header"
+         class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+         data-bs-toggle="collapse">
+        <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="page-header-content d-lg-flex border-top">
+    <div class="d-flex">
+      <div class="breadcrumb py-2">
+        <a href="index.html" class="breadcrumb-item"><i class="ph-house"></i></a>
+        <span class="breadcrumb-item active">FAQ's</span>
+      </div>
+
+      <a href="#breadcrumb_elements"
+         class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+         data-bs-toggle="collapse">
+        <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+      </a>
+    </div>
+
+  </div>
+</div>
+<!-- /page header -->
+
+
+<!-- Content area -->
+<div class="content">
+
+
+  <!-- Inner container -->
+  <div class="d-flex align-items-stretch align-items-lg-start flex-column flex-lg-row">
+
+    <!-- Left content -->
+    <div class="flex-1 order-2 order-lg-1">
+
+      <!-- Questions list -->
+      <div class="card card-body">
+
+        <div *ngFor="let g of faqGroups" [id]="'faq_group_' + g.Category.Id" class="mb-3">
+          <h5 class="fw-semibold py-1 mb-1">{{ g.Category.Name }}</h5>
+          <div class="mb-2">{{ g.Category.Description }}</div>
+          <div class="accordion">
+            <div class="accordion-item" *ngFor="let item of g.Items">
+              <div class="accordion-header">
+                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#question_' + item.Id">
+                  <i class="ph-question me-2"></i>
+                  {{ item.Title }}
+                </button>
+              </div>
+
+              <div [id]="'question_' + item.Id" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  <p class="mb-3" [innerHTML]="item.Content"></p>
+
+                  <div class="d-sm-flex align-items-sm-center">
+                    <span class="text-muted ms-auto small">Обновлено: {{ item.Updated | date : 'dd.MM.yyyy' }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /questions list -->
+
+    </div>
+    <!-- /left content -->
+
+
+    <!-- Right sidebar component -->
+    <div class="sidebar sidebar-component sidebar-expand-lg bg-transparent shadow-none order-1 order-lg-2 ms-lg-3 mb-3">
+
+      <!-- Sidebar content -->
+      <div class="sidebar-content">
+
+        <!-- Search -->
+<!--        <div class="card">-->
+<!--          <div class="sidebar-section-header border-bottom">-->
+<!--            <span class="fw-semibold">Поиск</span>-->
+<!--            <div class="ms-auto">-->
+<!--              <a href="#" class="text-body">-->
+<!--                <i class="ph-question"></i>-->
+<!--              </a>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="sidebar-section-body">-->
+<!--            <div class="form-control-feedback form-control-feedback-end">-->
+<!--              <input type="search" class="form-control" placeholder="Search our help center">-->
+<!--              <div class="form-control-feedback-icon">-->
+<!--                <i class="ph-magnifying-glass"></i>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+        <!-- /search -->
+
+
+        <!-- Navigation -->
+        <div class="card">
+          <div class="sidebar-section-header border-bottom">
+            <span class="fw-semibold">Разделы</span>
+            <div class="ms-auto">
+              <a href="#" class="text-body">
+                <i class="ph-gear"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="sidebar-section-body pb-2">
+            <a href="#" class="btn btn-teal w-100">Ask question <i class="ph-chats ms-2"></i></a>
+          </div>
+
+          <div class="nav nav-sidebar">
+            <li class="nav-item" *ngFor="let g of faqGroups">
+              <a (click)="scrollToCategory(g)" class="nav-link cursor-pointer">
+                <i class="ph-lifebuoy"></i>
+                {{g.Category.Name}}
+              </a>
+            </li>
+          </div>
+        </div>
+        <!-- /navigation -->
+
+
+      </div>
+      <!-- /sidebar content -->
+
+    </div>
+    <!-- /right sidebar component -->
+
+  </div>
+  <!-- /inner container -->
+
+
+</div>
+<!-- /content area -->

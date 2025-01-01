@@ -1,0 +1,8 @@
+<div class="favourite-item" (click)="clicked($event)">
+  <div style="height: 20px">
+    <img *ngIf="!selected" style="height: 100%" src="/assets/images/star.svg"
+         alt="Добавить в избранное" title="Добавить в избранное">
+    <img *ngIf="selected" style="height: 100%" src="/assets/images/star-fill.svg"
+         alt="Убрать из избранного" title="Убрать из избранного">
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div app-navbar class="navbar navbar-expand-xl navbar-static shadow"></div>
+
+
+<!-- Page content -->
+<div class="page-content">
+
+  <!-- Main sidebar -->
+  <div app-left-sidebar class="sidebar sidebar-main sidebar-expand-xl">
+  </div>
+  <!-- /main sidebar -->
+
+
+  <!-- Main content -->
+  <div class="content-wrapper" #contentWrapper>
+
+    <!-- Inner content -->
+    <div class="content-inner">
+
+
+      <router-outlet/>
+
+      <!-- Footer -->
+      <div class="navbar navbar-sm navbar-footer border-top">
+        <div class="container-fluid">
+          <small>&copy; 2018 - {{ date | date : 'YYYY' }} SStats.net <span class="ms-2">v{{version}}</span> </small>
+
+          <ul class="nav">
+<!--            <li class="nav-item">-->
+<!--              <a routerLink="/faq" class="navbar-nav-link navbar-nav-link-icon rounded">-->
+<!--                <div class="d-flex align-items-center mx-md-1">-->
+<!--                  <i class="ph-lifebuoy"></i>-->
+<!--                  <span class="d-none d-md-inline-block ms-2">FAQ</span>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--              <a routerLink="/message-board" class="navbar-nav-link navbar-nav-link-icon rounded">-->
+<!--                <div class="d-flex align-items-center mx-md-1">-->
+<!--                  <i class="ph-question"></i>-->
+<!--                  <span class="d-none d-md-inline-block ms-2">Задать вопрос</span>-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </li>-->
+            <li class="nav-item ms-md-1">
+              <a routerLink="/feedback" class="navbar-nav-link navbar-nav-link-icon rounded" >
+                <div class="d-flex align-items-center mx-md-1">
+                  <i class="ph-at"></i>
+                  <span class="d-none d-md-inline-block ms-2">Обратная связь</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /footer -->
+
+    </div>
+    <!-- /inner content -->
+
+  </div>
+  <!-- /main content -->
+
+
+  <!-- Right sidebar -->
+  <div app-right-sidebar class="sidebar sidebar-end sidebar-expand-xl">
+  </div>
+  <!-- /right sidebar -->
+
+</div>
+<!-- /page content -->
+
+

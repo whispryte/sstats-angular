@@ -1,0 +1,30 @@
+.odds-item{
+  width: 40px;
+}
+
+.header{
+  border-bottom: 1px solid #494d56;
+  color: gray;
+}
+
+
+.header-tooltip{
+  text-decoration: underline dotted;
+  cursor: pointer;
+}
+
+.favourite-item{
+  width: 21px;
+
+  &:hover{
+    background-color: #1a1b1e;
+  }
+
+  & span:hover{
+    color: #0b76e6;
+  }
+}
+
+:host ::ng-deep .compact-col-header{
+  width: 30px;
+}

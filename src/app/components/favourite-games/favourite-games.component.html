@@ -1,0 +1,27 @@
+<div class="m-2">
+    <div *ngFor="let g of games" [attr.data-id]="g.Id" class="game-fav-row">
+        <div class="d-flex" style="font-size: small; color: gray">
+            <div>{{leagueName(g)}}</div>
+            <div class="ms-auto">{{g.Date | date:'HH:mm dd.MM'}}</div>
+        </div>
+        <div class="d-flex w-100 border-bottom">
+            <div class="d-flex flex-column flex-grow-1 cursor-pointer" [routerLink]="'/g/'+g.Id">
+                <div class="">{{g.HomeTeam.Name}}</div>
+                <div class="">{{g.AwayTeam.Name}}</div>
+            </div>
+            <div class="d-flex flex-column" style="flex-basis: 17px; color: rgb(128,128,128)">
+                <div>{{g.ScoreHomeHT}}</div>
+                <div>{{g.ScoreAwayHT}}</div>
+            </div>
+            <div class="d-flex flex-column" style="flex-basis: 17px">
+                <div>{{g.ScoreHomeFT}}</div>
+                <div>{{g.ScoreAwayFT}}</div>
+            </div>
+            <div class="remove-btn">
+                <button type="button" class="btn btn-sm btn-link btn-labeled btn-icon rounded-pill" title="Удалить из избранных" (click)="removeFromFav(g)">
+                    <i class="ph-trash"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

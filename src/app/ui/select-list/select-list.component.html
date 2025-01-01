@@ -1,0 +1,14 @@
+<div class="dropdown d-flex" >
+  <div style="overflow: hidden; text-overflow: ellipsis;" class="dropdown-toggle link" data-bs-toggle="dropdown" aria-expanded="false">
+    {{ label }}
+  </div>
+  <span *ngIf="allowClear && value" class="clear-icon link" (click)="reset()"><i class="ph ph-x"></i></span>
+
+  <ul class="dropdown-menu">
+    <li *ngFor="let i of items" [class.disabled-item]="isDisabled(i.value)">
+      <span class="dropdown-item" (click)="select(i,$event)">
+      <input type="checkbox" *ngIf="multiselect" class="me-1" [checked]="isSelected(i.value)"
+             [disabled]="isDisabled(i.value)"> {{ i.text }}</span>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,66 @@
+.brief-grid {
+  display: grid;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  justify-items: stretch;
+  grid-auto-rows: 1fr;
+  flex-grow: 1;
+  //border: 1px solid black;
+
+  & .header{
+    background-color: #3d3f4a;
+  }
+
+  & .sub-header{
+    //background-color: #2c2d33;
+  }
+
+  & > div{
+    background-color: #2c2d33;
+    padding: 4px;
+    border-color: #1a1e26;
+  }
+
+  &.grid-3{
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 30px 35px 1fr;
+  }
+
+  &.grid-2{
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 30px 35px 1fr;
+  }
+
+  &.grid-4{
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 30px 35px 1fr;
+  }
+}
+
+.glicko-cell{
+  background-color: #2c2d33;
+  padding: 3px 5px;
+  margin: 0 5px;
+  text-align: center;
+  border: 1px solid #4d4d51;
+}
+
+.glicko-probability{
+  border-radius: 61px;
+  border: 1px solid gray;
+  height: 45px;
+}
+
+.modal-url{
+  cursor: pointer;
+  text-decoration: underline dotted;
+  color: #bfc9ff;
+}
+
+.value-bet-badge{
+  background-color: #427442;
+  padding: 2px 5px;
+  margin-left: 5px;
+  border-radius: 15px;
+  font-size: smaller;
+}

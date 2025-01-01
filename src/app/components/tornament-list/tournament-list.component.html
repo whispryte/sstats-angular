@@ -1,0 +1,92 @@
+<!--&lt;!&ndash; Main navigation &ndash;&gt;-->
+<!--<div class="sidebar-section">-->
+
+<!--  &lt;!&ndash; Sub navigation &ndash;&gt;-->
+<!--  <div class="sidebar-section" style="background-color: #252529">-->
+<!--    <div class="sidebar-section-header border-bottom">-->
+<!--      <i class="ph-trophy me-2"></i>-->
+<!--      <span class="fw-semibold">Популярные турниры</span>-->
+<!--      <div class="ms-auto">-->
+<!--        <a href="#sidebar_end_navigation" class="text-reset" data-bs-toggle="collapse">-->
+<!--          <i class="ph-caret-down collapsible-indicator"></i>-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="collapse show" id="sidebar_end_navigation">-->
+<!--      <ul data-nav-type="accordion" class="nav nav-sidebar my-2">-->
+<!--        <li class="nav-item" *ngFor="let l of pupular"><a [routerLink]="'/t/'+l.Id" class="nav-link">-->
+<!--          <span [class]="getCountryIconClass(l.Country)" class="mt-1 me-2"></span>{{l.Name}}</a></li>-->
+<!--      </ul>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--  &lt;!&ndash; /sub navigation &ndash;&gt;-->
+
+
+<!--  <div class="collapse show" id="sidebar_end_search">-->
+<!--    <div class="sidebar-section-body">-->
+<!--      <div class="form-control-feedback form-control-feedback-end">-->
+<!--        <input type="search" class="form-control form-control-sm" placeholder="Search" (keyup)="searchChanged($event)"-->
+<!--               (change)="searchChanged($event)">-->
+<!--        <div class="form-control-feedback-icon">-->
+<!--          <i class="ph-magnifying-glass opacity-50"></i>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div class="sidebar-section">-->
+<!--  <ul class="nav nav-sidebar" id="sidebar-tournament-list">-->
+<!--    <li app-tournament-list-item *ngFor="let g of filtered" [country]="g" class="nav-item nav-item-submenu"></li>-->
+<!--  </ul>-->
+<!--</div>-->
+
+
+<div class="sidebar-section">
+  <ul class="nav nav-sidebar" data-nav-type="accordion">
+    <!-- Main -->
+    <li class="nav-item nav-item-submenu" style="background-color: #252529;padding-top:0;padding-bottom: 0;">
+      <a href="#" class="nav-link">
+        <i class="ph-trophy"></i>
+        <span>Популярные турниры</span>
+      </a>
+      <ul class="nav-group-sub collapse">
+        <li class="nav-item" *ngFor="let l of pupular"><a [routerLink]="'/t/'+l.Id" class="nav-link">
+          <span [class]="getCountryIconClass(l.Country)" class="mt-1 me-2"></span>{{ l.Name }}</a></li>
+      </ul>
+    </li>
+    <li class="nav-item nav-item-submenu" style="background-color: #252529;padding-top:0;padding-bottom: 0;">
+      <a href="#" class="nav-link">
+        <i class="ph-star"></i>
+        <span>Избранные турниры</span>
+      </a>
+      <ul class="nav-group-sub collapse">
+        <li class="nav-item" *ngFor="let l of favoriteTournaments"><a [routerLink]="'/t/'+l.Id" class="nav-link">
+<!--          <i class="ph-star fav-icon" style="margin-left: -42px" (click)="toggleFavorite(l,$event)"></i>-->
+          <span style="margin-left: -20px;margin-right: 10px"><app-fav-star
+            (selectedChange)="toggleFavorite(l)" [selected]="isFavorite(l)"/></span>
+          <span [class]="getCountryIconClass(l.Country)" class="mt-1 me-2"></span>{{ l.Name }}</a></li>
+      </ul>
+    </li>
+  </ul>
+
+
+  <div id="tournaments-search">
+    <div class="sidebar-section-body">
+      <div class="form-control-feedback form-control-feedback-end">
+        <input type="search" class="form-control form-control-sm" placeholder="Search" (keyup)="searchChanged($event)"
+               (change)="searchChanged($event)">
+        <div class="form-control-feedback-icon">
+          <i class="ph-magnifying-glass opacity-50"></i>
+        </div>
+      </div>
+    </div>
+
+    <ul class="nav nav-sidebar" id="sidebar-tournament-list">
+      <li app-tournament-list-item *ngFor="let g of filtered" [country]="g" class="nav-item nav-item-submenu"></li>
+    </ul>
+  </div>
+
+</div>

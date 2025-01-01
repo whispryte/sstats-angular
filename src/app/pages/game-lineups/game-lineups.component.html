@@ -1,0 +1,135 @@
+<div *ngIf="lineups" id="lineups">
+  <div class="row">
+    <div class="col-md-6">
+      <div>Тренер: {{ lineups.HomeCoach?.Name }}</div>
+      <div>Расстановка: {{ lineups.HomeFormation }}</div>
+    </div>
+    <div class="col-md-6 text-right">
+      <div>Тренер: {{ lineups.AwayCoach?.Name }}</div>
+      <div>Расстановка: {{ lineups.AwayFormation }}</div>
+    </div>
+  </div>
+
+  <div class="text-center" style="background-color: #2c2d33"><h4>Starting XI</h4></div>
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-sm">
+        <thead>
+        <tr>
+          <th>N</th>
+          <th>Name</th>
+          <th>Pos</th>
+          <th>Rating</th>
+          <th>Goals</th>
+          <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of startIXHome">
+          <td>{{ p.Number }}</td>
+          <td>{{ p.Name }}</td>
+          <td>{{ p.Position }}</td>
+          <td>{{ p.rating }}</td>
+          <td>{{ p.goals }}</td>
+          <td>
+            <button *ngIf="p.hasStats" [attr.data-player-id]="p.Id" class="btn btn-outline-dark btn-icon"
+                    style="height: 20px"
+                    data-bs-container="body" data-bs-toggle="popover">{{ p.rating ?? '?' }}
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-sm">
+        <thead>
+        <tr>
+          <th>N</th>
+          <th>Name</th>
+          <th>Pos</th>
+          <th>Rating</th>
+          <th>Goals</th>
+          <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of startIXAway">
+          <td>{{ p.Number }}</td>
+          <td>{{ p.Name }}</td>
+          <td>{{ p.Position }}</td>
+          <td>{{ p.rating }}</td>
+          <td>{{ p.goals }}</td>
+          <td>
+            <button *ngIf="p.hasStats" [attr.data-player-id]="p.Id" class="btn btn-outline-dark btn-icon"
+                    style="height: 20px"
+                    data-bs-container="body" data-bs-toggle="popover">{{ p.rating ?? '?' }}
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="text-center" style="background-color: #2c2d33"><h4>Substitutes</h4></div>
+  <div class="row">
+    <div class="col-md-6">
+      <table class="table table-sm">
+        <thead>
+        <tr>
+          <th>N</th>
+          <th>Name</th>
+          <th>Pos</th>
+          <th>Rating</th>
+          <th>Goals</th>
+          <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of substitutesHome">
+          <td>{{ p.Number }}</td>
+          <td>{{ p.Name }}</td>
+          <td>{{ p.Position }}</td>
+          <td>{{ p.rating }}</td>
+          <td>{{ p.goals }}</td>
+          <td>
+            <button *ngIf="p.hasStats" [attr.data-player-id]="p.Id" class="btn btn-outline-dark btn-icon"
+                    style="height: 20px"
+                    data-bs-container="body" data-bs-toggle="popover">{{ p.rating ?? '?' }}
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <table class="table table-sm">
+        <thead>
+        <tr>
+          <th>N</th>
+          <th>Name</th>
+          <th>Pos</th>
+          <th>Rating</th>
+          <th>Goals</th>
+          <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of substitutesAway">
+          <td>{{ p.Number }}</td>
+          <td>{{ p.Name }}</td>
+          <td>{{ p.Position }}</td>
+          <td>{{ p.rating }}</td>
+          <td>{{ p.goals }}</td>
+          <td>
+            <button *ngIf="p.hasStats" [attr.data-player-id]="p.Id" class="btn btn-outline-dark btn-icon"
+                    style="height: 20px"
+                    data-bs-container="body" data-bs-toggle="popover">{{ p.rating ?? '?' }}
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

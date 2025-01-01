@@ -1,0 +1,70 @@
+<app-spinner *ngIf="!game || !league || loading"></app-spinner>
+
+<div *ngIf="game && league" class="page-header page-header-dark has-cover">
+  <div class="page-header-content header-elements-inline pt-2">
+    <div class="game-header" style="margin: 0">
+      <div class="text-center">{{ game.Date | date:'HH:mm dd.MM.yyyy' }}</div>
+      <div class="row">
+        <div class="col-5 text-end"><h4>{{ game.HomeTeam.Name }}</h4></div>
+        <div class="col-2 text-center">
+          <h4>{{ game.HomeGoals }} - {{ game.AwayGoals }}</h4>
+          <div *ngIf="game.ScoreHomeHT!=undefined" class="ht-score">HT: {{ game.ScoreHomeHT }}
+            - {{ game.ScoreAwayHT }}
+          </div>
+          {{ getStatusLabel() }}
+        </div>
+        <div class="col-5 text-left"><h4>{{ game.AwayTeam.Name }}</h4></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-header-content d-md-flex flex-md-wrap border-top border-top-white border-opacity-20">
+    <div class="d-flex">
+      <div class="breadcrumb">
+        <a routerLink="/" class="breadcrumb-item"><span [class]="getCountryIconClass()"
+                                                        class="mr-1"></span>{{ league.Country.Name }}</a>
+        <a routerLink="/t/{{league.Id}}" class="breadcrumb-item">{{ league.Name }}</a>
+        <a routerLink="/t/{{league.Id}}/{{game.Season?.Year}}" class="breadcrumb-item">{{game.Season?.Year}}</a>
+        <span class="breadcrumb-item text-reset opacity-50 active py-2">{{ game.RoundName }}</span>
+      </div>
+      <a href="#bc_color_dark" class="d-flex align-items-center text-body d-md-none py-2 ms-auto"
+         data-bs-toggle="collapse">
+        <i class="ph-caret-circle-down"></i>
+      </a>
+    </div>
+    <div class="collapse d-lg-block ms-lg-auto d-flex">
+      <div class="d-lg-flex mb-2 mb-lg-0 pt-1">
+        <div class="border-end me-2">
+          <a *ngIf="game.LsId" [href]="'https://www.flashfootball.com/match/' + game.LsId + '/#/match-summary'" target="_blank" class="d-flex align-items-center text-body me-2"
+             style="margin-top: 3px" title="Flashscore.com ID">
+            <i class="ph ph-arrow-square-in me-1"></i>
+            {{ game.LsId }}
+          </a>
+        </div>
+        <app-fav-star [selected]="storage.favouriteGames().has(game.Id)" (selectedChange)="toggleFavoriteGame($event)"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul *ngIf="game && !loading" class="nav nav-tabs nav-tabs-underline nav-justified px-3">
+  <li class="nav-item"><a routerLink="summary" class="nav-link" routerLinkActive="active">Общее</a></li>
+  <li *ngIf="game.ScoreHomeFT != null || game.ScoreHomeHT != null" class="nav-item"><a routerLink="statistics"
+                                                                                         class="nav-link"
+                                                                                         routerLinkActive="active">Статистика</a>
+  </li>
+  <li *ngIf="game.ScoreHomeFT != null || game.ScoreHomeHT != null" class="nav-item"><a routerLink="events"
+                                                                                         class="nav-link"
+                                                                                         routerLinkActive="active">События</a>
+  </li>
+  <li class="nav-item"><a routerLink="lineups" routerLinkActive="active" class="nav-link">Составы</a></li>
+  <li class="nav-item"><a routerLink="odds" routerLinkActive="active" class="nav-link">Коэффициенты</a></li>
+  <li class="nav-item"><a routerLink="h2h" routerLinkActive="active" class="nav-link">H2H</a></li>
+  <li class="nav-item"><a routerLink="profits" routerLinkActive="active" class="nav-link">Профиты</a></li>
+<!--  <li class="nav-item"><a routerLink="analytics" routerLinkActive="active" class="nav-link">Прогнозы</a></li>-->
+</ul>
+
+
+<div class="content">
+  <router-outlet/>
+</div>

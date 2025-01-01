@@ -1,0 +1,29 @@
+.market-header{
+  background-color: #303136;
+  padding: 3px 0;
+}
+
+.market-chart-icon{
+  width: 40px;
+  text-align: right;
+  padding-right: 5px;
+
+  i {
+    cursor: pointer;
+    color: #8c9dc7;
+
+    &:hover{
+      color: #c9d4f6;
+    }
+  }
+}
+
+.outcome-row{
+  padding: 2px;
+  border-bottom: 1px solid #343434;
+
+  &:hover{
+    background-color: #26272a;
+  }
+}
+

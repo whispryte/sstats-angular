@@ -1,0 +1,8 @@
+<div class="d-flex">
+  <div class="me-2" style="color: lightgray">Соритровка</div>
+  <app-select-list [items]="sortItems" [(value)]="storage.gamesListSort"/>
+
+  <div class="ms-3 me-2" style="color: lightgray">Отображение</div>
+  <app-select-list [items]="oddsItems" [multiselect]="true" [maxSelected]="3" style="width: 150px" [(value)]="storage.gamesListDisplayedOdds"/>
+
+</div>

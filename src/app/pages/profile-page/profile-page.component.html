@@ -1,0 +1,196 @@
+<!-- Page header -->
+<div class="page-header page-header-light shadow">
+  <div class="page-header-content d-lg-flex">
+    <div class="d-flex">
+      <h4 class="page-title mb-0">
+        <span class="fw-normal">Настройки профиля</span>
+      </h4>
+
+      <a href="#page_header"
+         class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+         data-bs-toggle="collapse">
+        <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="page-header-content d-lg-flex border-top">
+    <div class="d-flex">
+      <div class="breadcrumb py-2">
+        <a routerLink="/" class="breadcrumb-item"><i class="ph-house"></i></a>
+        <!--        <a href="#" class="breadcrumb-item">User pages</a>-->
+        <span class="breadcrumb-item active">Настройки профиля</span>
+      </div>
+
+      <a href="#breadcrumb_elements"
+         class="btn btn-light align-self-center collapsed d-lg-none border-transparent rounded-pill p-0 ms-auto"
+         data-bs-toggle="collapse">
+        <i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+      </a>
+    </div>
+
+  </div>
+</div>
+<!-- /page header -->
+
+
+<div class="content">
+
+  <div class="d-flex">
+    <app-spinner *ngIf="!userModel" [size]="40" class="ms-auto me-auto"/>
+  </div>
+
+  <!-- Inner container -->
+  <div class="d-lg-flex align-items-lg-start" *ngIf="userModel">
+
+    <!-- Left sidebar component -->
+    <div class="sidebar sidebar-component sidebar-expand-lg bg-transparent shadow-none me-lg-3">
+
+      <!-- Sidebar content -->
+      <div class="sidebar-content">
+
+        <!-- Navigation -->
+        <div class="card">
+          <div class="sidebar-section-body text-center">
+            <h6 class="mb-0">{{ user?.UserName }}</h6>
+            <div>
+              <span *ngFor="let r of user?.Roles" class="badge bg-secondary me-1">{{ r }}</span>
+            </div>
+            <!--            <span class="text-muted">{{user?.Roles}}</span>-->
+          </div>
+
+          <ul class="nav nav-sidebar">
+            <li class="nav-item">
+              <a href="#dashboard-tab" class="nav-link active" data-bs-toggle="tab">
+                <i class="ph-gauge me-2"></i>
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#settings-tab" class="nav-link" data-bs-toggle="tab">
+                <i class="ph-gear me-2"></i>
+                Настройки
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#apikey-tab" class="nav-link" data-bs-toggle="tab">
+                <i class="ph-key me-2"></i>
+                API Key
+              </a>
+            </li>
+            <li class="nav-item-divider"></li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" data-bs-toggle="tab" (click)="logout()">
+                <i class="ph-sign-out me-2"></i>
+                Выйти
+              </a>
+            </li>
+          </ul>
+        </div>
+        <!-- /navigation -->
+
+      </div>
+      <!-- /sidebar content -->
+
+
+    </div>
+
+    <div class="tab-content flex-fill">
+      <div class="tab-pane fade active show" id="dashboard-tab">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Dashboard</h5>
+          </div>
+
+          <div class="card-body">
+            <div class="chart-container">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="settings-tab">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Настройки</h5>
+          </div>
+
+          <div class="card-body">
+            <form #settingsForm="ngForm">
+
+              <div class="row mb-3">
+                <label class="col-form-label col-lg-4">Имя пользователя:</label>
+                <div class="col-lg-8">
+                  <input type="text" class="form-control" placeholder="Eugene Kopyov" disabled
+                         [value]="userModel.UserName">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-form-label col-lg-4">Email:</label>
+                <div class="col-lg-8">
+                  <input type="email" class="form-control" placeholder="Email" [(ngModel)]="userModel.Email"
+                         [required]="true" name="email" email>
+                </div>
+              </div>
+
+              <hr/>
+
+              <div class="row mb-3">
+                <label class="col-form-label col-lg-4">Новый пароль:</label>
+                <div class="col-lg-8">
+                  <input type="password" class="form-control" placeholder="Новый пароль" [(ngModel)]="password"
+                         minlength="5" maxlength="20" name="password">
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <label class="col-form-label col-lg-4">Повторить пароль:</label>
+                <div class="col-lg-8">
+                  <input type="password" class="form-control" placeholder="Повторить пароль"
+                         [(ngModel)]="confirmPassword" minlength="5" maxlength="20" name="confirmPassword" #confirmPass="ngModel"
+                  >
+                  <div *ngIf="confirmPass.errors?.['notSame']" class="small" style="color: red">
+                    Пароли не совпадают
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center py-sm-2">
+            <button type="button" class="btn btn-light w-100 w-sm-auto" (click)="resetSettings()">Отмена</button>
+            <button type="button" class="btn btn-primary mt-3 mt-sm-0 w-100 w-sm-auto" (click)="saveSettings()"
+                    [appButtonLoading]="saving" >Сохранить
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="apikey-tab">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">API Key</h5>
+          </div>
+
+          <div class="card-body">
+            <div class="row mb-3">
+              <label class="col-form-label col-lg-4">API ключ:</label>
+              <div class="col-lg-8">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="API ключ отсутсвует" [value]="userModel.ApiKey"
+                         disabled>
+                  <button class="btn btn-light" type="button" (click)="generateApiKey()" [appButtonLoading]="saving">
+                    Сгенерировать новый ключ
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--          <div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center py-sm-2">-->
+          <!--            <button type="button" class="btn btn-primary mt-3 mt-sm-0 w-100 w-sm-auto ms-auto">Сохранить</button>-->
+          <!--          </div>-->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

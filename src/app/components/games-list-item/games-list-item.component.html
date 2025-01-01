@@ -1,0 +1,70 @@
+<div *ngIf="!compact" class="game-row" data-[id]="game.Id" (click)="openGame(game)">
+  <div [attr.data-date]="game.Date" style="font-size: small">{{ game.Date | date:'HH:mm dd.MM.YYYY' }}</div>
+  <div class=" text-end" style="flex: 1 1 0px;">{{ game.HomeTeam.Name }}</div>
+  <div style="width: 100px" class="text-center">{{ game.ScoreHomeFT }} - {{ game.ScoreAwayFT }}</div>
+  <div class=" text-start" style="flex: 1 1 0px;">{{ game.AwayTeam.Name }}</div>
+  <div class="odds-item">{{ game.Odds?.Winner_Home }}</div>
+  <div class="odds-item">{{ game.Odds?.Winner_Draw }}</div>
+  <div class="odds-item">{{ game.Odds?.Winner_Away }}</div>
+  <div class="odds-item">
+    <span *ngIf="game.Glicko"
+          [ngClass]="{'glicko-profit' : profitGlicko[0]}">{{ game.Glicko.HomeProb * 100 | number : '1.0-0' }}%</span>
+  </div>
+  <div class="odds-item">
+    <span *ngIf="game.Glicko"
+          [ngClass]="{'glicko-profit' : profitGlicko[1]}">{{ game.Glicko.DrawProb * 100 | number : '1.0-0' }}%</span>
+  </div>
+  <div class="odds-item">
+    <span *ngIf="game.Glicko"
+          [ngClass]="{'glicko-profit' : profitGlicko[2]}">{{ game.Glicko.AwayProb * 100 | number : '1.0-0' }}%</span>
+  </div>
+  <div class="favourite-item" (click)="toggleFavouriteGame($event, game)">
+    <div style="height: 20px">
+      <span *ngIf="!isFavourite()" class="ph-star" title="Добавить в избранное"></span>
+      <img *ngIf="isFavourite()" style="height: 100%" src="/assets/images/star-fill.svg"
+           alt="Убрать из избранного" title="Убрать из избранного">
+    </div>
+  </div>
+</div>
+
+<div *ngIf="compact" class="game-row" [routerLink]="'/g/'+game.Id">
+  <div class="d-flex flex-column" style="width: 50px; color: #bfbfbf">
+    <div>{{ game.Date | date : 'HH:mm' }}</div>
+    <div>{{ game.Date | date : 'dd.MM' }}</div>
+  </div>
+  <div class="d-flex flex-column" style="flex: 1 1 0">
+    <div [class.fw-bold]="winnerTeamId==game.HomeTeam.Id">{{ game.HomeTeam.Name }}</div>
+    <div [class.fw-bold]="winnerTeamId==game.AwayTeam.Id">{{ game.AwayTeam.Name }}</div>
+  </div>
+  <div class="d-flex flex-column compact-col-header" style="color: dimgray">
+    <div>{{ game.ScoreHomeHT }}</div>
+    <div>{{ game.ScoreAwayHT }}</div>
+  </div>
+  <div class="d-flex flex-column compact-col-header">
+    <div>{{ game.ScoreHomeFT }}</div>
+    <div>{{ game.ScoreAwayFT }}</div>
+  </div>
+  <div class="d-flex flex-column compact-col-header" style="font-size: x-small;">
+    <div>{{ game.Odds?.Winner_Home }}</div>
+    <div>{{ game.Odds?.Winner_Draw }}</div>
+    <div>{{ game.Odds?.Winner_Away }}</div>
+  </div>
+  <div class="d-flex flex-column compact-col-header" style="font-size: x-small;">
+    <div>
+      <span *ngIf="game.Glicko"
+            [ngClass]="{'glicko-profit' : profitGlicko[0]}">{{ game.Glicko.HomeProb * 100 | number : '1.0-0' }}%</span>
+    </div>
+    <div>
+      <span *ngIf="game.Glicko"
+            [ngClass]="{'glicko-profit' : profitGlicko[1]}">{{ game.Glicko.DrawProb * 100 | number : '1.0-0' }}%</span>
+    </div>
+    <div>
+      <span *ngIf="game.Glicko"
+            [ngClass]="{'glicko-profit' : profitGlicko[2]}">{{ game.Glicko.AwayProb * 100 | number : '1.0-0' }}%</span>
+    </div>
+  </div>
+  <div *ngIf="winForTeam" class="d-flex flex-column compact-col-header"
+       style="align-items: center;justify-content: center;">
+    <div *ngIf="winnerLabel!=null" class="badge rounded-pill" [class]="winnerLabelClass()">{{ winnerLabel }}</div>
+  </div>
+</div>

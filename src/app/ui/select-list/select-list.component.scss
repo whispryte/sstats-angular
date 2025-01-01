@@ -1,0 +1,25 @@
+.link {
+  color: #7189b7;
+  cursor: pointer;
+}
+
+.link:hover {
+  color: #88a3d5;
+}
+
+.disabled-item {
+  cursor: not-allowed !important;
+  span {
+    color: gray;
+  }
+}
+
+.dropdown-menu{
+  li{
+    cursor: pointer;
+  }
+}
+
+.clear-icon{
+
+}

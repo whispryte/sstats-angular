@@ -1,0 +1,17 @@
+<div *ngIf="odds">
+  <div class="row">
+    <div class="col-md-3">
+      <select class="form-control" [(ngModel)]="selectedBookmaker" (change)="selectBook($event)">
+        <option *ngFor="let o of odds; index as i" [value]="i">{{o.BookmakerName}}</option>
+      </select>
+    </div>
+  </div>
+  <div *ngFor="let o of odds[selectedBookmaker].Odds" class="mb-3">
+    <div class="text-center odds-row-header"><b>{{o.MarketName}}</b></div>
+    <div class="row m-0">
+      <div class="col-md-{{calcColsNum(o.Odds.length)}} text-center odds-row-col" *ngFor="let item of o.Odds">
+        <div class="odds-row-bet"><span class="bet-label">{{item.Key}}:</span> {{item.Value}}</div>
+      </div>
+    </div>
+  </div>
+</div>

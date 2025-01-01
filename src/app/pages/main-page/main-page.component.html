@@ -1,0 +1,39 @@
+<!-- Page header -->
+<div class="page-header shadow page-header-dark">
+  <div class="page-header-content d-lg-flex">
+    <div class="d-none d-lg-flex">
+      <div class="breadcrumb py-2">
+        <a href="index.html" class="breadcrumb-item"><i class="ph-house"></i></a>
+        <span class="breadcrumb-item active">Матчи</span>
+      </div>
+    </div>
+
+    <div class="ms-lg-auto">
+      <week-picker [date]="dateRange" (dateChange)="dateChanged($event)"/>
+    </div>
+  </div>
+</div>
+<!-- /page header -->
+
+
+<div class="content">
+<!--  <app-games-list-settings />-->
+
+<!--  <div class="mt-1"></div>-->
+
+  <div class="mb-2"><app-select-list *ngIf="isToday" [items]="filterItems" [(value)]="todayFilter" (valueChange)="filterChanged($event)"/></div>
+
+
+  <app-spinner *ngIf="loading" [size]="50" style="width: 100%"/>
+
+  <div *ngIf="!loading">
+
+    <div id="main-games-list" class="mb-3" *ngFor="let d of groupedByDateGames">
+      <app-games-list *ngFor="let l of d.leagues" [games]="l.games" [league]="l.league" class="mb-3" [compact]="storage.compactContent.value"></app-games-list>
+    </div>
+
+  </div>
+  <div #bottomEl></div>
+  <app-spinner *ngIf="loadingMore && !fetchedAll" [size]="30" style="width: 100%"/>
+</div>
+

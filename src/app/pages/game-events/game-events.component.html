@@ -1,0 +1,18 @@
+<div *ngIf="events && game">
+    <div *ngFor="let e of events" class="row event-row">
+        <div class="col text-end"><span *ngIf="e.TeamId == game.HomeTeam.Id">{{e.Player?.Name}} <i
+                *ngIf="e.AssistPlayer?.Name" style="color: gray">({{e.AssistPlayer?.Name}}
+            )</i>  <span class="ms-2 badge bg-light text-body">{{e.Details}}</span><img class="ml-2" *ngIf="e.Type==1" alt=""
+                                                                                        src="/assets/images/football-svgrepo-com.svg"
+                                                                                        style="fill: white" width="20"/></span>
+        </div>
+        <div class="col-1 text-center">{{e.Minutes}}' <span *ngIf="e.ExtraMinutes">{{e.ExtraMinutes}}</span></div>
+        <div class="col text-left"><span *ngIf="e.TeamId == game.AwayTeam.Id"><img class="mr-2" *ngIf="e.Type==1" alt=""
+                                                                                   src="/assets/images/football-svgrepo-com.svg"
+                                                                                   style="fill: white"
+                                                                                   width="20"/><span
+                class="me-2 badge bg-light text-body">{{e.Details}}</span> {{e.Player?.Name}} <i
+                *ngIf="e.AssistPlayer?.Name" style="color: gray">({{e.AssistPlayer?.Name}})</i></span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<!--<div class="dropdown">-->
+<!--  <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--    week-->
+<!--  </button>-->
+<!--  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--    <a class="dropdown-item" href="#">Action</a>-->
+<!--    <a class="dropdown-item" href="#">Another action</a>-->
+<!--    <a class="dropdown-item" href="#">Something else here</a>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="piker-container">
+  <div class="btn-group btn-group-justified w-100">
+      <button type="button" class="btn btn-dark p-0" (click)="previousDayClick()"><span class="ph-caret-left"></span></button>
+      <button type="button" class="btn btn-dark" (click)="toggleMenu()">{{getPickedLabel()}}</button>
+      <button type="button" class="btn btn-dark p-0" (click)="nextDayClick()"><span class="ph-caret-right"></span></button>
+  </div>
+  <div class="picker-dropdown bg-dark" [hidden]="!isMenuVisible">
+    <div class="text-center">{{getMonth()}}</div>
+    <div class="d-flex">
+      <div class="week-label"></div>
+      <div class="week-day-header" *ngFor="let m of getDayLabels()">{{m}}</div>
+    </div>
+    <div class="d-flex week-row" [class.active]="w.isActive" *ngFor="let w of weeks">
+      <div class="week-label" (click)="weekClick(w)"><small><span class="ph-arrow-right"></span></small></div>
+      <div class="week-day-cell" [class.disabled-day]="d.isDisabled" [class.active]="d.isActive" *ngFor="let d of w.days" (click)="dayClick(d)">{{d.label}}</div>
+    </div>
+    <div class="text-center mt-1"><span class="today-btn" (click)="todayClick()"><i class="icon-history"></i> Today</span></div>
+  </div>
+</div>
+
+<!--<div class="input-group">-->
+<!--  <span class="input-group-prepend"><button class="btn btn-light btn-icon" type="button"><i class="icon-arrow-left32"></i></button></span>-->
+<!--  <input class="form-control cursor-pointer" readonly>-->
+<!--  <span class="input-group-append"><button class="btn btn-light" type="button"><i class="icon-arrow-right32"></i></button></span>-->
+<!--</div>-->

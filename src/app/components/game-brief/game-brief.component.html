@@ -1,0 +1,189 @@
+<div class="d-flex w-100" *ngIf="game && game.Odds">
+  <div class="brief-grid grid-3 text-center">
+    <div style="grid-row: 1; grid-column: 1 / 4" class="header">1X2</div>
+    <div style="grid-row: 2; grid-column: 1" class="sub-header border-bottom border-top">1</div>
+    <div style="grid-row: 2; grid-column: 2" class="sub-header border-bottom border-start border-top border-end">X
+    </div>
+    <div style="grid-row: 2; grid-column: 3" class="sub-header border-bottom border-top">2</div>
+    <div style="grid-row: 3; grid-column: 1" class="border-bottom">{{ game.Odds.Winner_Home }}</div>
+    <div style="grid-row: 3; grid-column: 2"
+         class="border-start border-end border-bottom">{{ game.Odds.Winner_Draw }}
+    </div>
+    <div style="grid-row: 3; grid-column: 3" class="border-bottom">{{ game.Odds.Winner_Away }}</div>
+    <div>{{ displayPercentage(this.probabilities?.win?.[0]) }}</div>
+    <div class="border-start border-end">{{ displayPercentage(this.probabilities?.win?.[1]) }}</div>
+    <div>{{ displayPercentage(this.probabilities?.win?.[2]) }}</div>
+  </div>
+  <div class="brief-grid grid-2 text-center border-start border-width-2">
+    <div style="grid-row: 1; grid-column: 1 / 3" class="header border-bottom">Тотал {{ game.Odds.OU_Param }}</div>
+    <div style="grid-row: 2; grid-column: 1" class="sub-header border-bottom">Меньше</div>
+    <div style="grid-row: 2; grid-column: 2" class="sub-header border-bottom border-start">Больше</div>
+    <div style="grid-row: 3; grid-column: 1" class="border-bottom">{{ game.Odds.OU_Under }}</div>
+    <div style="grid-row: 3; grid-column: 2" class="border-start border-bottom">{{ game.Odds.OU_Over }}</div>
+    <div>{{ displayPercentage(this.probabilities?.ou?.[0]) }}</div>
+    <div class="border-start">{{ displayPercentage(this.probabilities?.ou?.[1]) }}</div>
+  </div>
+  <div class="brief-grid grid-2 text-center border-start border-width-2">
+    <div style="grid-row: 1; grid-column: 1 / 3" class="header border-bottom">Инд. Тотал
+      хозяев {{ game.Odds.OU_Home_Param }}
+    </div>
+    <div style="grid-row: 2; grid-column: 1" class="sub-header border-bottom">Меньше</div>
+    <div style="grid-row: 2; grid-column: 2" class="sub-header border-bottom border-start">Больше</div>
+    <div style="grid-row: 3; grid-column: 1" class="border-bottom">{{ game.Odds.OU_Home_Under }}</div>
+    <div style="grid-row: 3; grid-column: 2" class="border-start border-bottom">{{ game.Odds.OU_Home_Over }}</div>
+    <div>{{ displayPercentage(this.probabilities?.ouh?.[0]) }}</div>
+    <div class="border-start">{{ displayPercentage(this.probabilities?.ouh?.[1]) }}</div>
+  </div>
+  <div class="brief-grid grid-2 text-center border-start border-width-2">
+    <div style="grid-row: 1; grid-column: 1 / 3" class="header border-bottom">Инд. тотал
+      гостей {{ game.Odds.OU_Away_Param }}
+    </div>
+    <div style="grid-row: 2; grid-column: 1" class="sub-header border-bottom">Меньше</div>
+    <div style="grid-row: 2; grid-column: 2" class="sub-header border-bottom border-start">Больше</div>
+    <div style="grid-row: 3; grid-column: 1" class="border-bottom">{{ game.Odds.OU_Away_Under }}</div>
+    <div style="grid-row: 3; grid-column: 2" class="border-start border-bottom">{{ game.Odds.OU_Away_Over }}</div>
+    <div>{{ displayPercentage(this.probabilities?.oua?.[0]) }}</div>
+    <div class="border-start">{{ displayPercentage(this.probabilities?.oua?.[1]) }}</div>
+  </div>
+  <div class="brief-grid grid-2 text-center border-start border-width-2">
+    <div style="grid-row: 1; grid-column: 1 / 3" class="header border-bottom">XG по коэффициентам</div>
+    <div style="grid-row: 2; grid-column: 1" class="sub-header border-bottom">Хозяева</div>
+    <div style="grid-row: 2; grid-column: 2" class="sub-header border-bottom border-start">Гости</div>
+    <div style="grid-row: 3; grid-column: 1">{{ game.Odds.XgHome | number : '1.0-2' }}</div>
+    <div style="grid-row: 3; grid-column: 2" class="border-start">{{ game.Odds.XgAway | number : '1.0-2' }}</div>
+  </div>
+  <div *ngIf="mae != null" class="brief-grid grid-3 text-center border-start border-width-2">
+    <div style="grid-row: 1; grid-column: 1 / 4" class="header">Отклонение</div>
+    <div style="grid-row: 2; grid-column: 1" class="sub-header border-bottom border-top">Хозяева</div>
+    <div style="grid-row: 2; grid-column: 2" class="sub-header border-bottom border-start border-top border-end">
+      Гости
+    </div>
+    <div style="grid-row: 2; grid-column: 3" class="sub-header border-bottom border-top">Среднее</div>
+    <div style="grid-row: 3; grid-column: 1">{{ homeMae| number : '1.0-2' }}</div>
+    <div style="grid-row: 3; grid-column: 2" class="border-start border-end">{{ awayMae| number : '1.0-2' }}</div>
+    <div style="grid-row: 3; grid-column: 3">{{ mae| number : '1.0-2' }}</div>
+  </div>
+</div>
+
+<div class="d-flex mt-4" *ngIf="glicko">
+  <h5 class="me-2">Glicko2</h5>
+  <small (click)="openGlickoModal($event)" class="ms-2 mt-1 modal-url">Динамика <i class="ph ph-chart-line"></i></small>
+</div>
+
+<div class="row" *ngIf="glicko">
+  <div class="col-md-6">
+    <div class="brief-grid grid-4 text-center">
+      <div class="header border-end">Рейтинг</div>
+      <div class="header border-end">Отклонение</div>
+      <div class="header border-end">Волатильность</div>
+      <div class="header">xG</div>
+      <div class="border-end sub-header">{{ glicko.HomeRating | oddsNum }}</div>
+      <div class="border-end sub-header">{{ glicko.HomeRd| oddsNum }}</div>
+      <div class="border-end sub-header">{{ glicko.HomeVolatility | oddsNum }}</div>
+      <div class="sub-header"><span *ngIf="glicko.HomeXg">{{ glicko.HomeXg | oddsNum }}</span></div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="brief-grid grid-4 text-center">
+      <div class="header border-end">Рейтинг</div>
+      <div class="header border-end">Отклонение</div>
+      <div class="header border-end">Волатильность</div>
+      <div class="header">xG</div>
+      <div class="border-end sub-header">{{ glicko.AwayRating | oddsNum }}</div>
+      <div class="border-end sub-header">{{ glicko.AwayRd | oddsNum }}</div>
+      <div class="border-end sub-header">{{ glicko.AwayVolatility | oddsNum }}</div>
+      <div class="sub-header"><span *ngIf="glicko.AwayXg">{{ glicko.AwayXg | oddsNum }}</span></div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="glicko && game" class="d-flex mt-3">
+  <div class="brief-grid grid-3 text-center" style="grid-template-rows: 30px 50px;">
+    <div class="header border-end">Победа {{ game.HomeTeam.Name }}</div>
+    <div class="header border-end">Ничья</div>
+    <div class="header">Победа {{ game.AwayTeam.Name }}</div>
+    <div class="border-end sub-header">
+      <div *ngIf="glicko.HomeWinProbability">
+        <div>{{ glicko.HomeWinProbability * 100 | oddsNum }} %</div>
+        <small style="color: lightgray; text-decoration: underline dotted;"
+               title="Ставить если коэффициент букмекера выше указанного">> {{ 1 / glicko.HomeWinProbability | oddsNum }}</small>
+        <span class="value-bet-badge" title="Value bet" *ngIf="game.Odds?.Winner_Home && 1 / glicko.HomeWinProbability < game.Odds!.Winner_Home!">$</span>
+      </div>
+    </div>
+    <div class="border-end sub-header">
+      <div *ngIf="glickoDrawProb">
+        <div>{{ glickoDrawProb * 100 | oddsNum }}%</div>
+        <small style="color: lightgray; text-decoration: underline dotted;"
+               title="Ставить если коэффициент букмекера выше указанного">> {{ 1 / glickoDrawProb | oddsNum }}</small>
+        <span class="value-bet-badge" title="Value bet" *ngIf="game.Odds?.Winner_Draw && 1 / glickoDrawProb < game.Odds!.Winner_Draw!">$</span>
+      </div>
+    </div>
+    <div class="sub-header">
+      <div *ngIf="glicko.AwayWinProbability">
+        <div>{{ glicko.AwayWinProbability * 100 | oddsNum }}%</div>
+        <small style="color: lightgray; text-decoration: underline dotted;"
+               title="Ставить если коэффициент букмекера выше указанного">> {{ 1 / glicko.AwayWinProbability | oddsNum }}</small>
+        <span class="value-bet-badge" title="Value bet" *ngIf="game.Odds?.Winner_Away && 1 / glicko.AwayWinProbability < game.Odds!.Winner_Away!">$</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col">
+    <div class="row">
+      <div class="col-auto pt-2">Последние N матчей</div>
+      <div class="col-auto">
+        <select class="form-select form-select-sm" [(ngModel)]="filter.period" (change)="filterChanged()">
+          <option value="2">5</option>
+          <option value="3">10</option>
+          <option value="4">15</option>
+          <option value="5">20</option>
+          <option value="6">25</option>
+          <option value="7">30</option>
+          <option value="1">Текущий сезон</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <select class="form-select form-select-sm" [(ngModel)]="filter.fixtureType" (change)="filterChanged()">
+          <option value="All">Все матчи</option>
+          <option selected value="HomeAway">Хозяева дома, гости в гостях</option>
+        </select>
+      </div>
+      <div class="col-auto pt-2">
+        <div class="d-inline-flex flex-row-reverse align-items-center me-3">
+          <input type="checkbox" id="dc_ri_c" [(ngModel)]="filter.sameLeague" (change)="filterChanged()">
+          <label class="me-2" for="dc_ri_c">Только в этой лиге</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-md-6">
+    <h5 class="text-center">{{ (game?.HomeTeam?.Name) }}</h5>
+    <app-last-game-stats *ngIf="game && lastGamesStats?.home" [stats]="lastGamesStats!.home"/>
+  </div>
+  <div class="col-md-6">
+    <h5 class="text-center">{{ (game?.AwayTeam?.Name) }}</h5>
+    <app-last-game-stats *ngIf="game && lastGamesStats?.away" [stats]="lastGamesStats!.away"/>
+  </div>
+</div>
+
+<div class="mt-2">
+  <small (click)="openExportToText($event)" class="ms-2 mt-1 modal-url">Текстовая сводка</small>
+</div>
+
+<app-modal #glickoModal>
+  <app-c3-chart *ngIf="glickoRatingsHistory" [data]="glickoRatingsHistory"/>
+</app-modal>
+
+<app-modal #exportModal title="Статистикав текстовом виде">
+  <div>
+    <pre>{{plainTextStatistics}}
+    </pre>
+  </div>
+</app-modal>

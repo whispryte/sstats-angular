@@ -1,0 +1,160 @@
+<div class="content d-flex justify-content-center align-items-center">
+
+  <!-- Login form -->
+  <div class="login-form wmin-sm-400">
+    <div class="card mb-0">
+      <ul class="nav nav-tabs nav-tabs-underline nav-justified bg-light rounded-top mb-0">
+        <li class="nav-item">
+          <a href="#login-tab1" id="login-tab-link" class="nav-link active" data-bs-toggle="tab">
+            <h6 class="my-1">Вход</h6>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#login-tab2" class="nav-link" data-bs-toggle="tab">
+            <h6 class="my-1">Регистрация</h6>
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content card-body">
+        <div class="tab-pane fade show active" id="login-tab1">
+          <div class="text-center mb-3">
+            <!--            <h5 class="mb-0">Введите логин и пароль</h5>-->
+            <span class="d-block text-muted">Введите логин или email и пароль</span>
+          </div>
+
+          <form #loginForm=ngForm>
+            <div class="mb-3">
+              <label class="form-label">Логин / email</label>
+              <div class="form-control-feedback form-control-feedback-start">
+                <input type="text" class="form-control" placeholder="john@doe.com" required [(ngModel)]="userName"
+                       name="userName">
+                <div class="invalid-feedback">Enter your username</div>
+                <div class="form-control-feedback-icon">
+                  <i class="ph-user-circle text-muted"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Пароль</label>
+              <div class="form-control-feedback form-control-feedback-start">
+                <input type="password" class="form-control" placeholder="•••••••••••" required [(ngModel)]="password"
+                       name="password">
+                <div class="invalid-feedback">Enter your username</div>
+                <div class="form-control-feedback-icon">
+                  <i class="ph-lock text-muted"></i>
+                </div>
+              </div>
+              <div class="invalid-feedback">Enter your password</div>
+            </div>
+
+            <div class="d-flex align-items-center mb-3">
+              <label class="form-check">
+                <input type="checkbox" name="remember" class="form-check-input" checked>
+                <span class="form-check-label">Запомить</span>
+              </label>
+
+              <a href="#" class="ms-auto">Забыли пароль?</a>
+            </div>
+
+            <div class="mb-3">
+              <button type="button" (click)="login($event)" class="btn btn-primary w-100" [appButtonLoading]="loading">
+                Войти
+              </button>
+            </div>
+
+            <div *ngIf="error" class="alert alert-danger" role="alert">
+              {{ error }}
+            </div>
+          </form>
+
+
+          <div class="text-center text-muted content-divider mb-3">
+            <span class="px-2">Ещё нет учетной записи?</span>
+          </div>
+
+          <div class="mb-3">
+            <a href="#login-tab2" data-bs-toggle="tab" class="btn btn-light w-100">Зарегистрироваться</a>
+          </div>
+
+          <!--          <span class="form-text text-center text-muted">By continuing, you're confirming that you've read our <a href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>-->
+        </div>
+
+        <div class="tab-pane fade" id="login-tab2">
+          <div class="text-center mb-3">
+            <span class="d-block text-muted">Создание новой учетной записи</span>
+          </div>
+
+
+          <form #registerForm="ngForm">
+            <div class="mb-3">
+              <label class="form-label">Имя пользователя</label>
+              <div class="form-control-feedback form-control-feedback-start">
+                <input type="text" class="form-control" placeholder="Username" [(ngModel)]="registerData.UserName"
+                       name="userName" required [pattern]="'^[a-zA-Z]\\w+$'">
+                <div class="form-control-feedback-icon">
+                  <i class="ph-user-circle text-muted"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Пароль</label>
+              <div class="form-control-feedback form-control-feedback-start">
+                <input type="password" class="form-control" placeholder="•••••••••••"
+                       [(ngModel)]="registerData.Password" name="password" required>
+                <div class="form-control-feedback-icon">
+                  <i class="ph-lock text-muted"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Подтвердить пароль</label>
+              <div class="form-control-feedback form-control-feedback-start">
+                <input type="password" class="form-control" placeholder="•••••••••••"
+                       #confirmPassword="ngModel"
+                       [(ngModel)]="registerData.ConfirmPassword" name="confirmPassword" required minlength="4">
+                <div class="form-control-feedback-icon">
+                  <i class="ph-lock text-muted"></i>
+                </div>
+                <span class="small" style="color: red" *ngIf="confirmPassword.errors?.['notSame']">Пароли не совпадают</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <div class="form-control-feedback form-control-feedback-start">
+                <input type="text" class="form-control" placeholder="email" [(ngModel)]="registerData.Email"
+                       name="email" required email>
+                <div class="form-control-feedback-icon">
+                  <i class="ph-at text-muted"></i>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center text-muted content-divider mb-3">
+              <span class="px-2">Additions</span>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-check">
+                <input type="checkbox" name="accept" class="form-check-input" #acceptCheckbox>
+                <span class="form-check-label">Принять <a href="#">&nbsp;пользовательские соглашения</a></span>
+              </label>
+            </div>
+
+            <div *ngIf="error" style="color: red" class="small">{{error}}</div>
+
+            <button type="submit" class="btn btn-teal w-100" [appButtonLoading]="loading" (click)="register()">
+              Регистрация
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /login form -->
+
+</div>

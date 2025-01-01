@@ -1,0 +1,167 @@
+<div class="content">
+  <div class="card">
+    <div class="card-header">
+      <h6 class="fw-normal mb-0">API – Документация</h6>
+    </div>
+
+    <div class="card-body">
+      API SStats.net предоставляет данные о футбольных матчах (статистика, коэффициенты, составы, события и т.д) в
+      формате JSON, csv.
+      <br/>
+      <br/>
+      Основной адрес: <code>https://api.sstats.net</code>
+      <br/>
+
+      <br><i>Пример</i>:<br/>
+      Список матчей сезона: <a href="https://api.sstats.net/games/list?LeagueId=41&Year=2023&apikey=75kwgw7361l0l1ir" target="_blank">https://api.sstats.net/games/list?LeagueId=41&Year=2023</a>
+      <br/>
+      Данные матча: <a href="https://api.sstats.net/games/1183255?apikey=75kwgw7361l0l1ir" target="_blank">https://api.sstats.net/games/1183255</a>
+      <br>
+      Данные прогноза Glicko 2 и xG: <a href="https://api.sstats.net/games/glicko/1183255?apikey=75kwgw7361l0l1ir" target="_blank">https://api.sstats.net/games/glicko/1183255</a>
+
+      <br/><br/>
+      <b>Авторизация</b><br/>
+      Для использования API вам необходимо иметь api-ключ, который представляет собой строку из 16 символов.<br/><br/>
+      Публичный API ключ: <code>75kwgw7361l0l1ir</code>. Ограничение: 300 запросов в минуту на всех пользователей.<br/><br/>
+      API-ключ (apikey) должен передаваться в каждом запросе одним из трёх способов:<br/>
+      <ol>
+        <li>В HTTP заголовках в поле <code>apikey</code>.</li>
+        <li>В параметре адреса: <code>?apikey=75kwgw7361l0l1ir</code></li>
+        <li>Либо поле apikey должно присутсвовать в Cookie</li>
+      </ol>
+
+      <br/>
+      Получить индивидуальный API ключ можно после <a routerLink="/login">регистрации</a>, на странице <a routerLink="/profile">профиля</a>
+
+
+
+      <h3 class="mb-0 fw-light mt-3">
+        <a
+          href="https://www.postman.com/whispryte/workspace/sstats-net/collection/352734-f2164615-a618-49f2-8b83-375f0d27f1a3"
+          target="_blank"><i class="ph ph-link"></i> Перейти к документации - Postman</a>
+      </h3>
+
+      <br/>
+      <h6 class="mb-0 fw-lighter">Есть вопросы по API?</h6>
+      Смотрие <a routerLink="/faq">FAQ</a> или <a routerLink="/feedback">пишите нам</a> напрямую. Всегда готовы выслушать ваши пожелания.
+
+
+    </div>
+  </div>
+
+  <div class="card mt-2" *ngIf="false">
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered table-lg text-center">
+        <thead>
+        <tr>
+          <th class="text-start">Выберите тариф</th>
+          <th>
+            <h6 class="my-1">Бесплатный</h6>
+            <h4 class="mb-0">
+              $0
+              <span class="fs-base fw-normal text-muted">/ месяц</span>
+            </h4>
+          </th>
+          <th>
+            <h6 class="my-1">Минимальный</h6>
+            <h4 class="mb-0">
+              €1
+              <span class="fs-base fw-normal text-muted">/ месяц</span>
+            </h4>
+          </th>
+          <th>
+            <h6 class="my-1">Стандартный <i class="ph ph-check"></i></h6>
+            <h4 class="mb-0">
+              €3
+              <span class="fs-base fw-normal text-muted">/ месяц</span>
+            </h4>
+          </th>
+          <th>
+            <h6 class="my-1">Профессиональный</h6>
+            <h4 class="mb-0">
+              €10
+              <span class="fs-base fw-normal text-muted">/ month</span>
+            </h4>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td class="text-start">Лимит запросов (обычные)</td>
+          <td>150 запросов / минута *</td>
+          <td>100 запросов / минута</td>
+          <td>300 запросов / минута</td>
+          <td>600 запросов/ минута</td>
+        </tr>
+        <tr>
+          <td class="text-start">Лимит запросов (тяжелые)</td>
+          <td>15 запросов / минута *</td>
+          <td>10 запросов / минута</td>
+          <td>30 запросов / минута</td>
+          <td>60 запросов / минута</td>
+        </tr>
+        <tr>
+          <td class="text-start">Лиги</td>
+          <td>Все лиги</td>
+          <td>Все лиги</td>
+          <td>Все лиги</td>
+          <td>Все лиги</td>
+        </tr>
+        <tr>
+          <td class="text-start">Выгрузки БД</td>
+          <td><i class="ph-x-circle text-danger"></i></td>
+          <td><i class="ph-x-circle text-danger"></i></td>
+          <td><i class="ph-check-circle text-success"></i></td>
+          <td><i class="ph-check-circle text-success"></i></td>
+        </tr>
+        <tr>
+          <td class="text-start">Индивидуальный пул</td>
+          <td><i class="ph-x-circle text-danger"></i></td>
+          <td><i class="ph-check-circle text-success"></i></td>
+          <td><i class="ph-check-circle text-success"></i></td>
+          <td><i class="ph-check-circle text-success"></i></td>
+        </tr>
+        <tr>
+          <td class="text-start">Индивидуальное сопровождение</td>
+          <td><i class="ph-x-circle text-danger"></i></td>
+          <td><i class="ph-x-circle text-danger"></i></td>
+          <td><i class="ph-x-circle text-danger"></i></td>
+          <td><i class="ph-check-circle text-success"></i></td>
+        </tr>
+        <tr>
+          <td class="text-start">Тех поддержка</td>
+          <td><i class="ph-check-circle text-success"></i></td>
+          <td><i class="ph-check-circle text-success"></i></td>
+          <td><i class="ph-check-circle text-success"></i></td>
+          <td><i class="ph-check-circle text-success"></i></td>
+        </tr>
+
+        <tr class="table-border-solid">
+          <td></td>
+          <td>
+
+          </td>
+          <td>
+            <a class="btn btn-primary" href="#">
+              <i class="ph-shopping-cart me-2"></i>
+              Order
+            </a>
+          </td>
+          <td>
+            <a class="btn btn-primary" href="#">
+              <i class="ph-shopping-cart me-2"></i>
+              Order
+            </a>
+          </td>
+          <td>
+            <a class="btn btn-primary" href="#">
+              <i class="ph-shopping-cart me-2"></i>
+              Order
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div>
+  <div class="d-flex mb-3">
+    <div>
+      <div class="d-inline-flex align-items-center">
+        <input type="checkbox" id="dc_li_u" (change)="filterChanged()" [(ngModel)]="filter.thisLeague">
+        <label class="ms-2" for="dc_li_u">Только эта лига</label>
+      </div>
+    </div>
+
+    <div class="ms-3">
+      <div class="d-inline-flex align-items-center">
+        <input type="checkbox" id="dc_li_u2" (change)="filterChanged()" [(ngModel)]="filter.homeAway">
+        <label class="ms-2" for="dc_li_u2">Хозяева дома, гости в гостях</label>
+      </div>
+    </div>
+
+    <div class="ms-3">
+      <div class="d-inline-flex align-items-center">
+        <input type="checkbox" id="dc_li_u3" (change)="filterChanged()" [(ngModel)]="filter.sameGames">
+        <label class="ms-2" for="dc_li_u3">Похожие матчи</label>
+      </div>
+    </div>
+  </div>
+
+  <app-spinner *ngIf="loading"/>
+
+  <div *ngIf="game && !loading">
+    <div class="row">
+      <div class="col-md-6">
+        <b>{{ game.HomeTeam.Name }}</b>
+        <app-games-list [games]="homeGames" compact header [winForTeam]="game.HomeTeam.Id"/>
+      </div>
+      <div class="col-md-6">
+        <b>{{ game.AwayTeam.Name }}</b>
+        <app-games-list [games]="awayGames" compact header [winForTeam]="game.AwayTeam.Id"/>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-md-6 ms-auto me-auto">
+        <b>{{ game.HomeTeam.Name }} x {{ game.AwayTeam.Name }}</b>
+        <app-games-list [games]="versus" compact header/>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,27 @@
+<div #containerEl>
+  <div *ngIf="header || league">
+    <div *ngIf="!compact" class="d-flex header">
+      <div><span *ngIf="league">{{ league.Country.Name }}: {{ league.Name }}</span></div>
+      <div class="ms-auto"></div>
+      <div class="odds-item">1</div>
+      <div class="odds-item">X</div>
+      <div class="odds-item">2</div>
+      <div class="odds-item">G1</div>
+      <div class="odds-item">GX</div>
+      <div class="odds-item">G2</div>
+      <div class="favourite-item"></div>
+    </div>
+    <div *ngIf="compact" class="d-flex header">
+      <div><span *ngIf="league">{{ league.Country.Name }}: {{ league.Name }}</span></div>
+      <div class="ms-auto"></div>
+      <div class="header-tooltip compact-col-header" title="Счет первого тайма">1Т</div>
+      <div class="header-tooltip compact-col-header" title="Счет">С</div>
+      <div class="header-tooltip compact-col-header" title="Коэффициенты 1X2">1X2</div>
+      <div class="header-tooltip compact-col-header" title="Glicko2 вероятности">G</div>
+      <div class="compact-col-header" *ngIf="winForTeam"></div>
+    </div>
+  </div>
+
+
+  <app-games-list-item *ngFor="let g of games" [game]="g" [compact]="compact" [winForTeam]="winForTeam"/>
+</div>

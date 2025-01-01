@@ -1,0 +1,96 @@
+<div>
+
+  <div class="d-flex mb-3">
+    <div>
+      <div class="d-inline-flex align-items-center">
+        <input type="checkbox" id="dc_li_u" (change)="filterChanged()" [(ngModel)]="filter.thisLeague">
+        <label class="ms-2" for="dc_li_u">Только эта лига</label>
+      </div>
+    </div>
+
+    <div class="ms-3">
+      <div class="d-inline-flex align-items-center">
+        <input type="checkbox" id="dc_li_u2" (change)="filterChanged()" [(ngModel)]="filter.homeAWay">
+        <label class="ms-2" for="dc_li_u2">Хозяева дома, гости в гостях</label>
+      </div>
+    </div>
+
+    <div class="ms-3">
+      <div class="d-inline-flex align-items-center">
+        <input type="checkbox" id="dc_li_u3" (change)="filterChanged()" [(ngModel)]="filter.sameGames">
+        <label class="ms-2" for="dc_li_u3">Похожие матчи</label>
+      </div>
+    </div>
+
+    <div class="ms-3 d-flex">
+      <span class="me-2">Букмекер:</span>
+      <app-select-list [items]="bookies" [allowClear]="true" (valueChange)="filterChanged($event)" [(value)]="filter.bookieId"/>
+    </div>
+
+    <div class="ms-3 d-flex">
+      <span class="me-2">Лимит:</span>
+      <app-select-list [items]="limitList" (valueChange)="filterChanged($event)" [(value)]="filter.limit"/>
+    </div>
+  </div>
+
+  <app-spinner *ngIf="loading"/>
+
+  <div *ngIf="profits">
+
+    <ul class="nav nav-tabs mb-3" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a href="#tab-full-time" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab">
+          Полный матч
+        </a>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <a href="#tab-first-half" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
+          Первый тайм
+        </a>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <a href="#tab-second-half" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
+          Второй тайм
+        </a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane fade" role="tabpanel" *ngFor="let key of ['full-time', 'first-half', 'second-half']; let i = index" [ngClass]="{'active show' : i == 0}"
+           [id]="'tab-' + key">
+        <div class="row">
+          <div class="col-md-6" *ngFor="let p of profits[key]">
+            <div *ngFor="let market of p" class="mb-3">
+              <table class="table table-striped table-xs">
+                <thead>
+                <tr style="background-color: #353844;">
+                  <th>{{ market.market }}</th>
+                  <th style="width: 40px" appTooltip="Профит" class="cursor-pointer">P</th>
+                  <th style="width: 40px" appTooltip="Количество матчей" class="cursor-pointer">N</th>
+                  <th style="width: 40px" appTooltip="Процент захода. Включая возврат" class="cursor-pointer">%</th>
+                  <th style="width: 40px"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let outcome of market.outcomes">
+                  <td>{{ outcome.Name }}</td>
+                  <td [style.background-color]="getColor(outcome)">{{ outcome.Value | number : '1.0-2' }}</td>
+                  <td>{{ outcome.GamesCount }}</td>
+                  <td>{{ round(outcome.Success / outcome.GamesCount * 100) }}%</td>
+                  <td><a *ngIf="outcome.GamesCount > 1" (click)="openProfitChart($event, market, outcome)" tabindex="1"
+                         class="cursor-pointer"><i class="ph ph-chart-line-up"></i></a></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-modal #chartModal [title]="chartTitle">
+    <app-c3-chart [data]="chartData" *ngIf="chartData"/>
+  </app-modal>
+</div>

@@ -1,0 +1,32 @@
+.odds-item{
+  width: 40px;
+  font-size: 90%;
+}
+
+.game-row{
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid #3f4042;
+  padding: 3px;
+  cursor: pointer;
+
+  &:hover{
+   background-color: #1a1b1e;
+  }
+}
+
+
+.favourite-item{
+  width: 21px;
+  user-select: none;
+
+  & span:hover{
+    color: #c5b89b;
+    background-color: #1a1e26;
+  }
+}
+
+
+.glicko-profit{
+  color: #67a767;
+}

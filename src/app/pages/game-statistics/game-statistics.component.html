@@ -1,0 +1,33 @@
+<div class="row" *ngIf="stats && stats.length">
+  <div class="col-md-6" *ngIf="stats">
+    <div class="card">
+      <div class="card-header"></div>
+      <div class="card-body">
+        <div class="stats-row" *ngFor="let s of stats">
+          <div class="d-flex justify-content-between">
+            <div>{{s.homeVal}}</div>
+            <div>{{s.label}}</div>
+            <div>{{s.awayVal}}</div>
+          </div>
+          <div class="d-flex" style="background-color: #444b66; height: 7px;">
+            <div style="background-color: #3f6081;" [style]="{width : s.percentage + '%'}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card" *ngIf="xg">
+      <div class="card-header">xG — Expected goals</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 ms-auto"><div class="xg-circle">{{xg.home}}</div></div>
+          <div class="col-md-2"></div>
+          <div class="col-md-4"><div class="xg-circle">{{xg.away}}</div></div>
+        </div>
+        <hr/>
+        <div class="mt-2 text-center">Number of expected goals calculated from statistics</div>
+      </div>
+    </div>
+  </div>
+</div>

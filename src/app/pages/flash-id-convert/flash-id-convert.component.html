@@ -1,0 +1,35 @@
+<div class="content">
+  <div class="card">
+    <div class="card-header">Поиск матчей по Flash Id</div>
+    <div class="card-body">
+      Поиск матча по Id flashscore.com, flashfootball.com.
+      <br><br/>
+      Id матча из 8 символов
+      <br>
+      <pre>https://www.flashfootball.com/match/<span style="color: hotpink">Eup2yYAC</span>/#/match-summary</pre>
+
+
+      <div class="col-md-6 col-sm-12">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Flash Id" aria-label="Flash Id"
+                 aria-describedby="basic-addon2" [(ngModel)]="gameId" pattern="[a-zA-Z]{8}">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" style="border-radius: 0" (click)="find()"><i
+              class="ph-magnifying-glass me-1"></i> Поиск
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="game" class="mt-3">
+        <app-games-list-item [game]="game"></app-games-list-item>
+      </div>
+
+      <div *ngIf="notFound">
+        Матч с таким Flash Id не найден.
+      </div>
+
+    </div>
+  </div>
+</div>
+

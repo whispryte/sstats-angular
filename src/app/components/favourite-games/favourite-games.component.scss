@@ -1,0 +1,19 @@
+.remove-btn{
+  display: flex;
+  vertical-align: middle;
+
+  & i{
+    color: gray;
+  }
+
+  & i:hover{
+    color: lightgray;
+  }
+}
+
+.game-fav-row{
+
+  &:hover{
+    background-color: #27282c;
+  }
+}

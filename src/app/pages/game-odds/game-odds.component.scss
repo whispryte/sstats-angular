@@ -1,0 +1,33 @@
+.odds-row {
+  margin-bottom: 3px;
+}
+
+.odds-market-header {
+
+}
+
+.odds-row-header {
+  padding: 5px 0;
+  background-color: #37373e;
+  box-shadow: 0 1px 3px #181313;
+  margin-bottom: 2px;
+}
+
+.odds-row-col{
+  padding: 0 1px;
+
+  .bet-label{
+    margin-right: 5px;
+    color: #b9b9b9;
+  }
+}
+
+.odds-row-bet{
+  padding: 4px 0;
+  background-color: #33353c8f;
+  margin-bottom: 2px;
+
+  &:hover{
+    background-color: #353840
+  }
+}

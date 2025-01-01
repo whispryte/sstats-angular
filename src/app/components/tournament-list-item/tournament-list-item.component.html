@@ -1,0 +1,12 @@
+<a class="nav-link py-1 cursor-pointer" (click)="open=!open" [class.open]="open">
+  <span [class]="getCountryIconClass()" class="mt-1 me-2"></span>
+  {{ country.country.Name }}
+</a>
+<ul class="nav-group-sub collapse show" *ngIf="open">
+  <li *ngFor="let l of country.leagues" class="nav-item">
+    <!--    <span style="float: left"><i class="ph-star"></i></span>-->
+    <a [routerLink]="'/t/'+l.Id" class="nav-link py-1">
+      <span style="margin-left: -20px;margin-right: 10px"><app-fav-star
+        (selectedChange)="toggleFavorite(l)" [selected]="isFavorite(l)"/></span>
+      {{ l.Name }}</a></li>
+</ul>

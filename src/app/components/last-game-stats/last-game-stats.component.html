@@ -1,0 +1,35 @@
+<div class="d-flex">
+  <h6 class="me-2">Прибыль</h6> <small class="ms-1 mt-1">Последние {{stats.GamesCount}} матчей</small>
+</div>
+<table class="table table-sm">
+  <tbody>
+  <tr *ngFor="let p of profitItems">
+    <td>{{ p.title }}</td>
+    <td [ngClass]="{'profit-red' : p.value < -0.2, 'profit-green' : p.value > 0.2}">{{ p.value| number }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="d-flex mt-3">
+  <h6 class="me-2">Средние показатели</h6> <small class="ms-1 mt-1">Последние {{stats.GamesCount}} матчей</small>
+</div>
+<table class="table table-sm">
+  <tbody>
+  <tr>
+    <td>% побед</td>
+    <td>{{(stats.Wins/stats.GamesCount * 100) | number : '1.0-2'}}%</td>
+  </tr>
+  <tr>
+    <td>% ничьих</td>
+    <td>{{(stats.Draws/stats.GamesCount * 100) | number : '1.0-2'}}%</td>
+  </tr>
+  <tr>
+    <td>% поражений</td>
+    <td>{{(stats.Loses/stats.GamesCount * 100) | number : '1.0-2'}}%</td>
+  </tr>
+  <tr *ngFor="let s of statsItems">
+    <td>{{ s.title }}</td>
+    <td>{{ s.value | number : '1.0-2' }}</td>
+  </tr>
+  </tbody>
+</table>

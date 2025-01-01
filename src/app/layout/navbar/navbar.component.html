@@ -1,0 +1,91 @@
+<!-- Main navbar -->
+<div class="container-fluid">
+  <div class="d-flex d-xl-none me-2">
+    <button type="button" class="navbar-toggler sidebar-mobile-main-toggle rounded-pill">
+      <i class="ph-list"></i>
+    </button>
+    <button type="button" class="navbar-toggler sidebar-mobile-end-toggle rounded-pill">
+      <i class="ph-arrow-right"></i>
+    </button>
+  </div>
+
+  <div class="navbar-brand flex-1">
+    <a routerLink="/" class="d-inline-flex align-items-center">
+      <img src="/assets/images/soccer-ball-illustration-svgrepo-com.svg" alt="">
+      <img src="/assets/images/sstats.png" class="d-sm-inline-block h-16px ms-1" alt="">
+    </a>
+  </div>
+
+  <div id="center-nav-menu"
+    class="d-flex w-100 w-xl-auto overflow-auto overflow-xl-visible scrollbar-hidden border-top border-top-xl-0 order-1 order-xl-0 pt-2 pt-xl-0 mt-2 mt-xl-0">
+    <ul class="nav gap-1 justify-content-center flex-nowrap flex-xl-wrap mx-auto">
+      <li class="nav-item">
+        <a routerLink="/api" class="navbar-nav-link rounded">
+          API
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/faq" class="navbar-nav-link rounded">
+          FAQ
+        </a>
+      </li>
+<!--      <li class="nav-item">-->
+<!--        <a routerLink="strategy-testing-request" class="navbar-nav-link rounded">-->
+<!--          Тестирование стратегий-->
+<!--        </a>-->
+<!--      </li>-->
+    </ul>
+  </div>
+
+  <ul class="nav gap-1 flex-xl-1 justify-content-end order-0 order-xl-1">
+
+    <li class="nav-item nav-item-dropdown-xl dropdown">
+      <a href="#" class="navbar-nav-link rounded" data-bs-toggle="dropdown">
+        <i class="ph ph-gear-six"></i>
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-end p-3" style="width: 300px;background-color: #222326;">
+        <div class="d-flex align-items-center mb-3">
+          <h6 class="mb-0">Настройки</h6>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-form-label">
+            <label>Часовой пояс</label>
+          </div>
+          <div class="col-md-6">
+            <select class="form-select form-select-sm"
+                    (change)="storage.timeZone.next(parseInt($any($event.target).value))">
+              <option *ngFor="let t of timeZonesItems" [selected]="storage.timeZone.value == t.offset"
+                      [value]="t.offset">UTC{{ t.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <li class="nav-item nav-item-dropdown-xl dropdown">
+      <a href="#" class="navbar-nav-link dropdown-toggle rounded" data-bs-toggle="dropdown">
+        <i class="ph-squares-four"></i>
+      </a>
+
+      <div class="dropdown-menu dropdown-menu-end">
+        <a *ngIf="appService.currentUser()" routerLink="/profile" class="dropdown-item">Профиль</a>
+        <a *ngIf="!appService.currentUser()" routerLink="/login" class="dropdown-item">Вход / Реистрация</a>
+        <hr class="dropdown-divider">
+        <a routerLink="/api" class="dropdown-item">API</a>
+        <a routerLink="/flash-id-convert" class="dropdown-item">Flash Id</a>
+<!--        <a routerLink="leagues-stats" class="dropdown-item">Статистика лиг</a>-->
+        <a routerLink="strategy-testing-request" class="dropdown-item">Тестирование стратегий</a>
+        <hr class="dropdown-divider">
+        <a routerLink="/news" class="dropdown-item">Новости</a>
+        <a routerLink="/faq" class="dropdown-item">FAQ</a>
+<!--        <a routerLink="/about" class="dropdown-item">О сайте</a>-->
+        <a routerLink="/feedback" class="dropdown-item">Обратная связь</a>
+        <!--          <div class="dropdown-divider"></div>-->
+        <!--          <a routerLink="/message-board" class="dropdown-item">Доска пожеланий</a>-->
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- /main navbar -->

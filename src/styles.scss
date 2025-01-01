@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+.sidebar-main-resized #tournaments-search{
+  display: none;
+}
+
+
+@media (max-width: 1200px) {
+  #center-nav-menu {
+    display: none !important;
+  }
+}
+
+
+
+.c3-ygrid-line.grid-zero-line line {
+  stroke: #cf3955;
+  stroke-width: 1px;
+}
+.c3-ygrid-line.grid-zero-line text {
+  fill: pink;
+}
